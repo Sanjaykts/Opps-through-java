@@ -1,0 +1,61 @@
+import java.io.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+class framediv extends JFrame implements ActionListener
+{
+JPanel p;
+JTextField t1,t2,t3;
+JButton b;
+JLabel msg;
+public void actionPerformed(ActionEvent e)
+{
+int n1,n2,n3;
+JButton bt;
+bt=(JButton)e.getSource();
+if(bt.getLabel().equals("Cal"));
+{
+try
+{
+n1=Integer.parseInt(t1.getText());
+n2=Integer.parseInt(t2.getText());
+n3=n1/n2;
+t3.setText(String.valueOf(n3));
+msg.setText("calculation performed..");
+}
+catch(NumberFormatException ex)
+{
+msg.setText("Wrong Data Values are entered...");
+}
+catch(ArithmeticException ex)
+{
+msg.setText("Zero divide cannot possible");
+}
+}
+}
+public framediv()
+{
+setTitle("Frame for division..");
+p=new JPanel();
+t1=new JTextField("10000");
+t2=new JTextField("1000");
+t3=new JTextField("Result Here");
+b=new JButton("Cal");
+b.addActionListener(this);
+p.add(t1);
+p.add(new JLabel("/"));
+p.add(t2);
+p.add(new JLabel("="));
+p.add(t3);
+p.add(b);
+msg=new JLabel("Click Cal Button to perform cal..");
+p.add(msg);
+add(p);
+setSize(500,500);
+setVisible(true);
+}
+public static void main(String args[])
+{
+new framediv();
+}
+}
