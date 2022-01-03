@@ -1,0 +1,48 @@
+abstract class Shape
+{
+double a,b;
+abstract void printArea();
+}
+
+class Rectangle extends Shape
+{
+void printArea()
+{
+System.out.println("Area is="+(a*b));
+}
+}
+
+class Triangle extends Shape
+{
+void printArea()
+{
+System.out.println("Area is="+(0.5*(a*b)));
+}
+}
+
+class Circle extends Shape
+{
+void printArea()
+{
+System.out.println("Area is="+(a*b*b));
+}
+}
+class Area
+{
+public static void main(String[] args)
+{ 
+Rectangle ob=new Rectangle();
+ob.a=10;
+ob.b=13;
+ob.printArea();
+
+Triangle ob1=new Triangle();
+ob1.a=6;
+ob1.b=10;
+ob1.printArea();
+
+Circle ob2=new Circle();
+ob2.a=3.14;
+ob2.b=5;
+ob2.printArea();
+}
