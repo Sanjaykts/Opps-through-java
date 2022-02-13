@@ -54,7 +54,7 @@ add(p);
 setSize(500,500);
 setVisible(true);
 }
-public static void main(String args[])
+public static void main(String args[]) 
 {
 new framediv();
 }
