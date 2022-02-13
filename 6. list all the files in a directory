@@ -19,6 +19,6 @@ public class ListDirectoryRecurisve {
     public static void main(String[] args) {
         ListDirectoryRecurisve test = new ListDirectoryRecurisve();
         String dirToList = System.getProperty("user.home") + File.separator + "Documents";
-        test.listDirectory(dirToList, 0);
+        test.listDirectory(dirToList, 0); 
     }
 }
