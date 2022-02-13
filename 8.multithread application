@@ -1,73 +1,49 @@
-import java.util.*;
-class even implements Runnable
-{
-public int x;
-public even(int x)
-{
-this.x=x;
+import java.util.Random;
+class RandomNumberThread extends Thread {
+public void run() {
+Random random = new Random();
+for (int i = 0; i < 10; i++) {
+int randomInteger = random.nextInt(100);
+System.out.println("Random Integer generated : " + randomInteger);
+if((randomInteger%2) == 0) {
+SquareThread sThread = new SquareThread(randomInteger);
+sThread.start();
 }
-public void run() 
-{
-System.out.println("Thread Name:Even thread and"+x+"is even number and square of " + x +" is: " + x * x);
+else {
+CubeThread cThread = new CubeThread(randomInteger);
+cThread.start();
 }
-}
-
-class odd implements Runnable
-{
-public int x;
-public odd(int x)
-{
-this.x=x;
-}
-public void run()
-{
-System.out.println("Thread name: ODD Thread and " + x +" is odd number and cube of " + x + "is:"+x * x * x);
-}
-}
-
-class A extends Thread {
-public String tname;
-public Random r;
-public Thread t1,t2;
-public A(String s)
-{
-tname=s;
-}
-public void run(){
-int num=0;
-r= new Random();
-try
-{
-for(int i=0; i<5;i++)
-{
-num=r.nextInt(100);
-System.out.println("main Thread and generated number is"+num);
-if(num%2==0)
-{
-t1=new Thread (new even(num));
-t1.start();
-}
-else
-{
-t2=new Thread(new odd(num));
-t2.start();
-}
+try {
 Thread.sleep(1000);
-System.out.println("--------------------------------------");
 }
-}
-catch(Exception ex)
-{
-System.out.println(ex.getMessage());
+catch (InterruptedException ex) {
+System.out.println(ex);
 }
 }
 }
-
-public class Mthread
-{
-public static void main(String[] agrs)
-{
-A a =new A("one");
-a.start();
+}
+class SquareThread extends Thread {
+int number;
+SquareThread(int randomNumbern) {
+number = randomNumbern;
+}
+public void run() {
+System.out.println("Square of " + number + " = " + (number * number));
+}
+}
+class CubeThread extends Thread {
+int number;
+CubeThread(int randomNumber) {
+number = randomNumber;
+}
+public void run() {
+System.out.println("Cube of " + number + " = " + number * number *
+number);
+}
+}
+public class MultiThreadingTest {
+public static void main(String args[]) {
+RandomNumberThread rnThread = new RandomNumberThread();
+rnThread.start();
 }
 }
