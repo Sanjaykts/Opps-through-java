@@ -6,7 +6,7 @@ public even(int x)
 {
 this.x=x;
 }
-public void run()
+public void run() 
 {
 System.out.println("Thread Name:Even thread and"+x+"is even number and square of " + x +" is: " + x * x);
 }
