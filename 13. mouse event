@@ -1,96 +1,60 @@
 import java.awt.*;
 import java.applet.*;
 import java.awt.event.*;
-
-/*<applet code="AdapterDemo" width=300 height=100></applet>*/
-
-public class AdapterDemo extends Applet
-{
-String msg="";
-int mousex=0,mousey=0;
-
-public AdapterDemo()
-{
-addMouseListener(new MyMouseAdapter(this));
-addMouseMotionListener(new MyMouseMotionAdapter(this));
+/*<applet code="MouseDemo" width=300 height=300>
+</applet>*/
+public class MouseDemo extends Applet implements MouseListener, MouseMotionListener {
+int mx = 0;
+int my = 0;
+String msg = "";
+public void init() {
+addMouseListener(this);
+addMouseMotionListener(this);
 }
-public void paint(Graphics g)
-{
-g.drawString(msg,mousex,mousey);
+public void mouseClicked(MouseEvent me) {
+mx = 20;
+my = 40;
+msg = "Mouse Clicked";
+repaint();
 }
+public void mousePressed(MouseEvent me) {
+mx = 30;
+my = 60;
+msg = "Mouse Pressed";
+repaint();
 }
-
-class MyMouseAdapter extends MouseAdapter
-{
-AdapterDemo ad;
-public MyMouseAdapter(AdapterDemo ad)
-{
-this.ad=ad;
+public void mouseReleased(MouseEvent me) {
+mx = 30;
+my = 60;
+msg = "Mouse Released";
+repaint();
 }
-public void mouseExited(MouseEvent me)
-{
-ad.mousex=me.getX();
-ad.mousey=me.getY();
-ad.msg="Mouse Exited at"+ad.mousex+"  "+ad.mousey;
-ad.repaint();
-ad.showStatus("Mouse Exited");
+public void mouseEntered(MouseEvent me) {
+mx = 40;
+my = 80;
+msg = "Mouse Entered";
+repaint();
 }
-public void mouseEntered(MouseEvent me)
-{
-ad.mousex=me.getX();
-ad.mousey=me.getY();
-ad.msg="Mouse entered at "+ad.mousex+"  "+ad.mousey;
-ad.repaint();
-ad.showStatus("Mouse Entered");
+public void mouseExited(MouseEvent me) {
+mx = 40;
+my = 80;
+msg = "Mouse Exited";
+repaint();
 }
-public void mouseReleased(MouseEvent me)
-{
-ad.mousex=me.getX();
-ad.mousey=me.getY();
-ad.msg="Mouse Released at"+ad.mousex+"  "+ad.mousey;
-ad.repaint();
-ad.showStatus("Mouse Released");
+public void mouseDragged(MouseEvent me) {
+mx = me.getX();
+my = me.getY();
+showStatus("Currently mouse dragged" + mx + " " + my);
+repaint();
 }
-public void mousePressed(MouseEvent me)
-{
-ad.mousex=me.getX();
-ad.mousey=me.getY();
-ad.msg="Mouse Pressed at"+ad.mousex+"  "+ad.mousey;
-ad.repaint();
-ad.showStatus("Mouse Pressed");
+public void mouseMoved(MouseEvent me) {
+mx = me.getX();
+my = me.getY();
+showStatus("Currently mouse is at" + mx + " " + my);
+repaint();
 }
-public void mouseClicked(MouseEvent me)
-{
-ad.mousex=me.getX();
-ad.mousey=me.getY();
-ad.msg="Mouse Clicked at"+ad.mousex+"  "+ad.mousey;
-ad.repaint();
-ad.showStatus("Mouse Clicked");
-}
-}
-
-class MyMouseMotionAdapter extends MouseMotionAdapter
-{
-AdapterDemo ad;
-
-public MyMouseMotionAdapter(AdapterDemo ad)
-{
-this.ad=ad;
-}
-public void mouseMoved(MouseEvent me)
-{
-ad.mousex=me.getX();
-ad.mousey=me.getY();
-ad.msg="Mouse moved at"+ad.mousex+"  "+ad.mousey;
-ad.repaint();
-ad.showStatus("Mouse Moved");
-}
-public void mouseDragged(MouseEvent me)
-{
-ad.mousex=me.getX();
-ad.mousey=me.getY();
-ad.msg="Mouse Dragged at"+ad.mousex+"  "+ad.mousey;
-ad.repaint();
-ad.showStatus("Mouse Dragged");
+public void paint(Graphics g) {
+g.drawString("Handling Mouse Events", 30, 20);
+g.drawString(msg, 60, 40);
 }
 }
