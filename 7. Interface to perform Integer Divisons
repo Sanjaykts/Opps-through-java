@@ -59,3 +59,17 @@ public static void main(String args[])
 new framediv();
 }
 }
+repaint();
+} catch (ArithmeticException e) {
+System.out.println("Can't be divided by Zero" + e);
+res.setText("");
+msg = "Can't be divided by Zero";
+repaint();
+}
+}
+}
+}
+public void paint(Graphics g) {
+g.drawString(msg, 30, 70);
+}
+}
