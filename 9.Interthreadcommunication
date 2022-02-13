@@ -1,4 +1,4 @@
-mport java.util.Vector;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,7 +39,7 @@ class Producer implements Runnable {
 
     private void produce(int i) throws InterruptedException {
 
-        //wait if queue is full
+       
         while (sharedQueue.size() == SIZE) {
             synchronized (sharedQueue) {
                 System.out.println("Queue is full " + Thread.currentThread().getName()
@@ -49,7 +49,7 @@ class Producer implements Runnable {
             }
         }
 
-        //producing element and notify consumers
+      
         synchronized (sharedQueue) {
             sharedQueue.add(i);
             sharedQueue.notifyAll();
@@ -80,7 +80,7 @@ class Consumer implements Runnable {
     }
 
     private int consume() throws InterruptedException {
-        //wait if queue is empty
+     
         while (sharedQueue.isEmpty()) {
             synchronized (sharedQueue) {
                 System.out.println("Queue is empty " + Thread.currentThread().getName()
@@ -90,7 +90,7 @@ class Consumer implements Runnable {
             }
         }
 
-        //Otherwise consume element and notify waiting producer
+       
         synchronized (sharedQueue) {
             sharedQueue.notifyAll();
             return (Integer) sharedQueue.remove(0);
