@@ -72,4 +72,4 @@ repaint();
 public void paint(Graphics g) {
 g.drawString(msg, 30, 70);
 }
-}
+} 
